@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Price Calculator</title>
+
+    <style>
+        
+        form {
+            background-image: url(https://cdn.pixabay.com/photo/2023/01/21/13/39/night-sky-7733876_960_720.jpg) ;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            border: 2px solid white;
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .form{
+            border: 1px solid white;
+            color: white;
+            border-radius: 14px;
+            width: 40%;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding: 3px;
+            margin : 3px;
+        }
+
+        .input{
+            color: white;
+            padding: 5px;
+            margin: 5px;
+            border-radius: 5px;
+            background-color: black;
+            opacity: 65%;
+        }
+        h2{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: white;
+            padding-left: 38px;
+        }
+        h1{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: white;
+        }
+        h3{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: white;
+        }
+
+
+    
+    </style>
+</head>
+
+<body>
+    <form class="body" action="{{ url_for('predict') }}" method="post">
+        <h1>Welcome to Home Price Calculator</h1>
+        <h3>This helps to calculate and predict Home prices given its features.</h3>
+        <div class="form">
+
+            <input type="number" name="bhk" class="input" placeholder="BHK">
+            <input type="number" name="bathrooms" class="input" placeholder="Bath Rooms">
+            <input type="number" name="area" class="input" placeholder="Total Area">
+            <input type="number" name="size" class="input" placeholder="Area of House in sqft">
+            <select name="status" id="status" class="input" placeholder="Select the Status of House">
+                <option value="for_sale">For Sale</option>
+                <option value="ready_to_build">Ready to Build</option>
+            </select>
+
+                <select name="place" class="input">
+                    {% for i in locations %}
+                    <option value="{{ i }}" >{{ i }}</option>
+                    {% endfor %}
+                </select>
+
+            <input type="Submit" id="submit" class="input">
+        </div>
+
+        <h2> Your Predicted House Price : $ {{ predicted_price }} </h2>
+    </form>
+
+
+</body>
+
+</html>
